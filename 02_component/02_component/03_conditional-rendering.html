@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        01. 조건부 렌더링
+        여러 개의 엘리먼트 중 특정 조건에 따라 하나의 엘리먼트만 렌더링 할 수 있다
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+
+        const answer = parseInt(prompt("리액트 꿀잼 인정 \n 1. 노인정 \n 2. 인정"));
+
+        // console.log(answer);
+        // console.log(answer === 1);
+
+        // const positiveElement = <h1> 앞으로 점점 더 재밌어져요 </h1>
+        // const negativeElement = <h1> 프론트엔드 개발자로 취업해 봅시다 </h1>
+        // root.render(
+        //     (answer === 1) ? positiveElement : negativeElement
+        // );
+
+        /* 02-1. JSX 내에 조건부로 엘리먼트 생성하기(특정한 상황에 따라 다른 엘리먼트를 생성하는 것이 더 좋은 방법이다) */
+        // let element;
+        // if (answer === 1) {
+        //     element = <h1> 앞으로 점점 더 재밌어져요 </h1>
+        // } else {
+        //     element = <h1> 프론트엔드 개발자로 취업해 봅시다 </h1>
+        // }
+
+        /* 02-2. 삼항연산자로 조건부 엘리먼트 생성하기(const로 할 수 있다는 것과 삼항연산자를 쓰는 구문을 더 많이 사용) */
+        // let element = (answer === 1) ? (<h1> 앞으로 점점 더 재밌어져요 </h1>) : (<h1> 프론트엔드 개발자로 취업해 봅시다 </h1>);
+
+        /* 02-3. &&연산자를 이용한 조건부 엘리먼트 생성하기 (조건이 맞는 경우에만 보이게 한다) */
+        // const element = answer === 1 && <h1> 앞으로 점점 더 재밌어져요 </h1>
+
+        /*
+            주의사항
+            false 조건을 가지고 렌더링을 하는 경우 조건에 일치하지 않으면 렌더링 되는 요소가 없다
+            0은 falsy한 값임에도 조건부 엘리먼트 생성을 하게 되면 0을 반환한다
+            (falsu값은 boolean 값에서 false로 평가되는 값을 말하며, null, undefined, 0, NaN, ''이 있다)
+        */
+        const number = 0;
+        console.log(!!number);
+        const element = number && <h1>truthy일 때 나오는 태그 </h1>
+        root.render(element);
+    </script>
+</body>
+</html>

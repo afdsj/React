@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- react Home -> 문서 -> 웹사이트에서 react 추가하기 (외부 파일 스크립트는 head에 작성한다) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/javascript">
+        /*  자바스크립트 문법
+            첫번째 : 생성하고자 하는 엘리먼트의 태그
+            두번째 : 엘리먼트의 속성
+            세번째 : 자식 노드
+        */
+        const greetingElement = React.createElement("h1", { className: "greeting", id: 'greeting' }, 'hello world!');
+
+        const textElement = React.createElement("h3", { id: "name" }, "안녕하세요, 호빵맨입니다");
+
+        /* react 16버전 이전에 생성하는 방식이다*/
+        // const domContainer = document.getElementById("root");
+        // const root = ReactDOM.createRoot(domContainer);
+        // root.render(greetingElement);
+        /* 
+            react 16버전이전의 react는 하나의 엘리먼트만 랜더링 하는 것이 가능하였으나
+            이후 버전에서는 배열을 랜더랑 하는 것이 가능하도록 하였다
+        */
+        ReactDOM.createRoot(document.getElementById("root")).render([greetingElement, textElement]);
+    </script>
+</body>
+</html>

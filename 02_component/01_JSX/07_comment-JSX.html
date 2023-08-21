@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다
+    -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+    <style>
+        /* 인라인 스타일 시트 방식에서 범위 주석만 가능하다 */
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <!-- html 내에서 주석 작성하는 방법은 일반적인 자바스크립트의 주석을 작성할 때와는 조금 다르다 -->
+    <script type="text/babel">
+        // 스크립트 내부에서 한 줄 주석
+        /* 스크립트 내부에서 여러 줄 주석 */
+        const element = (
+            <>
+                <h3>
+                    Comment in JSX
+                </h3>
+                {/*범위 주석*/}
+                {
+                    //한줄 주석
+                }
+                /*여기 내용은 화면에 표시되지롱*/
+                <h3
+                className = "text" // 시작 태그에도 주석을 작성하는 것이 가능하다
+                ></h3>
+            </>
+        );
+
+        ReactDOM.createRoot(document.getElementById("root")).render(element);
+    </script>
+</body>
+</html>
