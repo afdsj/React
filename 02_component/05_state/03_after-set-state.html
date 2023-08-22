@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다.-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class Light extends React.Component {
+            state = {
+                isOn: false //isOn이라는 상태를 확인할 수 있는 변수
+            };
+            render() {
+                const { isOn } = this.state;
+                const style = {
+                    width: 200,
+                    height: 200,
+                    backgroundColor: isOn ? "green"/*참*/ : "black"/*거짓*/,
+                    transition: '2s'
+                }
+                return (
+                    <>
+                        <div style={style}></div>
+                        <button onClick={() => {
+                            this.setState({ isOn: !isOn }, //state의 값을 !로 바꿔서 넣어주는 것.
+                                () => console.log(!isOn ? '불이 켜졌습니다.' : '불이 꺼졌습니다.'))
+                        }}>{isOn ? 'on' : 'off'}</button>
+                    </>
+                );
+            }
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<Light />);
+    </script>
+</body>
+</html>
