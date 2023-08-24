@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다.
+    -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useReducer } = React;
+
+        function reducer(state/* 프로퍼티 객체로 넣어줌 */, action /* 이벤트를 넣어줌 */) {
+            return {
+                ...state,
+                [action.name]: action.value
+            };
+        }
+
+        function RegistFrom() {
+            const [state, dispatch] = useReducer(reducer, {
+                name: '',
+                nickname: ''
+            });
+            const { name, nickname } = state; // 구조분해 할당
+
+            const onChangeHandler = e => dispatch(e.target); // return,몸체 생략 됨
+
+            return (
+                <>
+                {console.log("ddd")}
+                    <label>이름 : </label>
+                    <input type="text" name="name" onChange={onChangeHandler} />
+                    <br />
+                    <label>닉네임 : </label>
+                    <input type="text" name="nickname" onChange={onChangeHandler} />
+                    <br />
+                    <div>
+                        <h3>입력한 이름 : {name}</h3>
+                        <h3>입력한 닉네임 : {nickname}</h3>
+                    </div>
+                </>
+            );
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<RegistFrom/>);
+    </script>
+</body>
+
+</html>
