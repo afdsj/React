@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>RENDERING_TRAINING</title>
+</head>
+<body>
+    <!--
+        01. 콜라 자판기 사용자에게 입력을 받아 화면에 아래의 내용을 표시해주세요 
+            (1. 콜라(1000원), 2. 펩시(800원))
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+        /* 삼항연산자로 조건부 엘리먼트 생성하기 */
+        const choice = parseInt(prompt("음료수를 골라주세요 \n 1.콜라(1000원) \n 2.펩시(800원)"));
+        let element = (choice === 1)?(<h1>콜라를 선택하셨습니다</h1>) : (<h1>펩시를 선택하셨습니다</h1>)
+        ReactDOM.createRoot(document.getElementById("root")).render(element);
+    </script>
+</body>
+</html>
