@@ -9,19 +9,38 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 
+        04. 3번에 정의한 class를 인라인 속성으로 넣어주세요
+    -->
     <div id="root"></div>
     <script type="text/babel">
-        
-        const text = {
-            word : "Hello World"
-        };
 
+        const style = {
+            background: 'rgb(190, 251, 252)',
+            color: 'rgb(251, 98, 98)',
+            textAlign: 'center'
+        }
+
+        function name(text) {
+            return `${text.word}`;
+        }
+
+        const text = {
+            word: "Hello World"
+        }
+
+        const id = "hello";
+        const className = "highlight";
         const element = (
-            <>
-                <h1>{text.word}</h1>
-            </>
+            <React.Fragment>
+                <h1 id={id} className={className} style={style} onClick={word}>{name(text)}</h1>
+            </React.Fragment>
         );
-        
+
+        function word() {
+            alert("안녕");
+        }
+
         ReactDOM.createRoot(document.getElementById("root")).render(element);
     </script>
 </body>

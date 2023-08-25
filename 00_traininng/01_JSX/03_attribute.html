@@ -8,7 +8,7 @@
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <title>Document</title>
     <style>
-        .highlight{
+        .highlight {
             background: rgb(190, 251, 252);
             color: rgb(251, 98, 98);
             text-align: center;
@@ -16,13 +16,30 @@
     </style>
 </head>
 <body>
+    <!-- 
+        03. 2번 문제에 hello world를 추가한 엘리먼트에 id, class,를 hello 넣어주세요 
+        해당 엘리먼트를 클릭 하면 안녕이라는 팝업이 나오도록 해주세요 
+        hello world가 화면의 중앙에 오도록 하고 백그라운드 및 글자 색을 변경해주세요
+    -->
     <div id="root"></div>
     <script type="text/babel">
 
+        function name(text) {
+            return `${text.word}`;
+        }
+
+        const text = {
+            word: "Hello World"
+        }
+
         const id = "hello";
         const className = "highlight";
-        const element = <h1 id={id} className={className} onClick={word}>Hello World</h1>
-        
+        const element = (
+            <React.Fragment>
+                <h1 id={id} className={className} onClick={word}>{name(text)}</h1>
+            </React.Fragment>
+        );
+
         function word() {
             alert("안녕");
         }
