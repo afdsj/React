@@ -11,6 +11,18 @@
 <body>
     <div id="root"></div>
     <script type="text/babel">
-        // const text = <h1>Hello World</h1>;
+        
+        const text = {
+            word : "Hello World"
+        };
+
+        const element = (
+            <>
+                <h1>{text.word}</h1>
+            </>
+        );
+
+        ReactDOM.createRoot(document.getElementById("root")).render(element);
+    </script>
 </body>
 </html>
