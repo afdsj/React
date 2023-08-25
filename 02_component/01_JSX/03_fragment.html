@@ -25,37 +25,6 @@
             phone: '010-1234-1234'
         };
 
-        /* 01. 최상위 엘리먼트가 두 개 이상이면 에러가 발생한다 */
-        // const element = (
-        //     <h1>안녕</h1>
-        //     <h1>하세요</h1>
-        // )
-
-        /* 02. <div> 태그로 감싸서 하나의 DOM 트리를 생성 할 수 있도록 한다*/
-        // const element = (
-        //     <div>
-        //         <h1>안녕{user.name}</h1>
-        //         <h1>phone : {user.phone}</h1>
-        //     </div>
-        // );
-
-        /* 03. <React.Fragment>로 감싸서 형식상의 DOM 트리상 상위 엘리먼트를 만들어 준다 */
-        // const element = (
-        //     <React.Fragment>
-        //         <h1>안녕{user.name}</h1>
-        //         <h1>phone : {user.phone}</h1>
-        //     </React.Fragment>
-        // );
-
-        /* 04. React 라이브러리로부터 Fragment 객체만 구조분해 할당을 해주면 React.을 생략할 수 있다 */
-        // const { Fragment } = React;
-        // const {name, phone} = user;
-        // const element = (
-        //     <Fragment>
-        //         <h1>안녕 : {name + "님"}</h1>
-        //         <h1>phone : {phone + "전화해도됨?"}</h1>
-        //     </Fragment>
-        // );
 
         const element = (
             <>
