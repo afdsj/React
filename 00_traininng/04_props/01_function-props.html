@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>FUNCTION-PROPS</title>
+</head>
+<body>
+    <!-- 
+        01. 함수형 컴포넌트로 Title, content, footer를 생성하고 (내용은 자유롭게 채워주세요)
+        3개의 컴포넌트를 담는 App 컴포넌트를 생성하여 사용자의 화면에 표시해주세요
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+
+        const title = "title";
+        const content = "content";
+        const footer = "footer";
+
+        function Text(props) {
+            return (
+                <h1>여기는 {props.name}</h1>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(
+            [
+                <Text name={title}/>,
+                <Text name={content}/>,
+                <Text name={footer}/>
+            ]
+        );
+    </script>
+</body>
+</html>
