@@ -6,46 +6,56 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <title>Document</title>
+    <title>COMPONENT_TRAINING</title>
 </head>
 <body>
     <!-- 
-        01. 함수형 컴포넌트로 Title, content, footer를 생성하고 (내용은 자유롭게 채워주세요)
+        03. 클래스형 컴포넌트로 Title, content, footer를 생성하고 (내용은 자유롭게 채워주세요)
         3개의 컴포넌트를 담는 App 컴포넌트를 생성하여 사용자의 화면에 표시해주세요
     -->
     <div id="root"></div>
     <script type="text/babel">
 
-        const title = "Title";
-        const content = "content";
-        const footer = "Footer";
-
-        function Title(props) {
-            return (
-                <h1>여기는 {title}</h1>
-            );
+        class Title extends React.Component {
+            render() {
+                return (
+                    <h1>
+                        여기는 Title
+                    </h1>
+                );
+            }
         }
 
-        function Content(props) {
-            return (
-                <h1>여기는 {content}</h1>
-            );
+        class Content extends React.Component {
+            render() {
+                return (
+                    <h1>
+                        여기는 Content
+                    </h1>
+                );
+            }
         }
 
-        function Footer(props) {
-            return (
-                <h1>여기는 {footer}</h1>
-            );
+        class Footer extends React.Component {
+            render() {
+                return (
+                    <h1>
+                        여기는 Footer
+                    </h1>
+                );
+            }
         }
 
-        function App() {
-            return (
-                <div>
-                    <Title />
-                    <Content />
-                    <Footer />
-                </div>
-            );
+        class App extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <Title />
+                        <Content />
+                        <Footer />
+                    </div>
+                );
+            }
         }
 
         ReactDOM.createRoot(document.getElementById("root")).render(<App />);
