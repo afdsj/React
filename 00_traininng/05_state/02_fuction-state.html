@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>FUCTION-STATE</title>
+</head>
+<body>
+    <!-- 
+        02. 함수형 컴포넌트를 이용하여 text라는 state를 만들어주세요 
+        input 창의 내용이 입력됨에 따라 내부의 값이 변경되도록 해주세요
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        function FuctionState() {
+            const [text, setText] = useState("나는 text!")
+
+            console.log(text);
+
+            /* 이벤트가 일어나는 타겟의 value를 text 값으로 업데이트 해준다 */
+            const onChange = (e) => setText(e.target.value);
+
+            return (
+                <>
+                    <h1>{text}</h1>
+                    <input value={text} onChange={onChange} />
+                </>
+            )
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<FuctionState />);
+    </script>
+</body>
+</html>
