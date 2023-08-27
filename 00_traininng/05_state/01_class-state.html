@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>CLASS-STATE</title>
+</head>
+<body>
+    <!-- 
+        01. 클래스형 컴포넌트를 이용하여 text라는 state를 만들어주세요 
+        input 창의 내용이 입력됨에 따라 내부의 값이 변경되도록 해주세요
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+        class ClassState extends React.Component {
+            /* constructor 사용하지 않고 state 선언 가능 */
+            state = {
+                text: "나는 text!"
+            };
+
+            render() {
+                const { text } = this.state;
+                console.log(text);
+
+                const onChange = (e) => {this.setState({text:e.target.value})}
+
+                return (
+                    <>
+                        <h1>{text}</h1>
+                        <input type="text" onChange={onChange} />
+                    </>
+                )
+            }
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<ClassState />);
+    </script>
+</body>
+</html>
