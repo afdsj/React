@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다.
+    -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        function useInput() {
+            const [value, setValue] = useState('');
+            const onChange = e => setValue(e.target.value);
+
+            return { value, onChange };
+        }
+
+        function App() {
+            const name = useInput();
+            const password = useInput();
+            const email = useInput();
+            return (
+                <div>
+                    <label>이름:</label>
+                    <input type="text" value={name.value} onChange={name.onChange} />
+                    <br />
+                    <label>비밀번호:</label>
+                    <input type="password" {...password} /* 바벨에서 제공해주는 축약표현식 */ />
+                    <br />
+                    <label>이메일:</label>
+                    <input type="email" {...email} />
+                    <h4>name:{name.value}</h4>
+                    <h4>password:{password.value}</h4>
+                    <h4>email:{email.value}</h4>
+                </div>
+            );
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+    </script>
+</body>
+</html>

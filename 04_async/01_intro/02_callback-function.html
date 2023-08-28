@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            비동기 처리를 하기 위한 흔한 방법으로 콜백함수를 사용한다
+            하지만 특정 비동기 처리 이후 수행할 내용을 또 정의해야 하는 경우
+            콜백함수의 중첩이 생기고 이러한 것들이 많이 추가되면 콜백 지옥에 빠진다
+        */
+        function increase(number, callback) {
+            setTimeout(() => {
+                const result = number + 10;
+
+                if (callback) {
+                    callback(result);
+                }
+                return result;
+            }, 1000);
+        }
+
+        const result = increase(0, result => console.log(result)); // 콜백함수 전달
+
+        increase(0, result => { // 10
+            console.log("1 : ", result);
+
+            increase(result, result => { // 20 
+                console.log("2 : ", result);
+
+                increase(result, result => { // 30
+                    console.log("3 : ", result);
+                })
+
+                increase(result, result => { // 40
+                    console.log("4 : ", result);
+                })
+
+                increase(result, result => { // 50
+                    console.log("5 : ", result);
+                    console.log("end");
+                })
+            })
+        })
+        console.log('메인');
+    </script>
+</body>
+</html>
