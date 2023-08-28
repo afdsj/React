@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다.
+    -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        function App() {
+            const [number, setNumber] = useState(0);
+            const [toggle, setToggle] = useState(false);
+
+            const printNumber = () => {
+                console.log(`current number : `, number);
+            }
+
+            useEffect(() => {
+                console.log(printNumber);
+                console.log('printNumber 값 변화 인지됨');
+            }, [printNumber]); // 감지할 대상; 감지 : 변경
+
+            return (
+                <>
+                    <input
+                        type="number"
+                        value={number}
+                        onChange={e => setNumber(e.target.value)}
+                    />
+                    <button onClick={() => setToggle(!toggle)}>{String(toggle)}</button>
+                    <br />
+                    <button onClick={printNumber}>PrintNumberState</button>
+                </>
+            );
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+</body>
+</html>

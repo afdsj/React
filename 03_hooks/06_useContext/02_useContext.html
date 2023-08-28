@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .page {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+        }
+
+        .footer {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        useContext는 react 컴포넌트 트리 안에서 전역적으로 데이터를
+        공유할 수 있도록 고안된 방법이다
+        트리 구조가 복잡해질수록 하위 컴포넌트로 props를 전달하기 위해
+        drilling이 발생할 수 있게 되고 그러면 유지보수가 매우 힘들어지고
+        코드를 읽기에도 힘들어진다
+        하지만 context를 사용하면 중간 컴포넌트에게 props를 넘겨주지 않아도 되고
+        유지보수도 훨씬 수월하다
+        
+        단 context를 사용하면 컴포넌트를 재사용하기 어려워지기 때문에 꼭 필요할 때만 써야한다
+        때에 따라서는 context보다 props drilling이 더 간단한 해결책이 될 수 있다
+    -->
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, createContext, useContext } = React;
+
+        /*
+            context 객체를 createContext를 통해 만들게 되고 defaultValue가 없는 경우에는 null로 설정할 수 있다
+            context 객체를 구독하고 있는 컴포넌트를 렌더링 할 떄 react 트리 상위에서 가장 가까이 있는 
+            provider로 부터 현재 값을 읽어 들인다
+            이때 적절한 prodider를 찾지 못할 떄 쓰이는 값이 defaultValue이다
+        */
+        const DarkModeContext = createContext(null);
+        function Header() {
+            const context = useContext(DarkModeContext);
+            const { isDark } = context;
+            return (
+                <header
+                    className="header"
+                    style={{
+                        backgroundColor: isDark ? 'black' : 'white',
+                        color: isDark ? 'white' : 'black'
+                    }}
+                >
+                    <h1> Welcome to Greedy World!</h1>
+                </header>
+            );
+        }
+
+        function Content() {
+            const context = useContext(DarkModeContext);
+            const { isDark } = context;
+            return (
+                <div
+                    className="content"
+                    style={
+                        {
+                            backgroundColor: isDark ? 'gray' : 'white',
+                            color: isDark ? 'white' : 'black'
+                        }
+                    }
+                >
+                    <p> 내용 입니다.</p>
+                </div>
+            );
+        }
+
+        function Footer() {
+            const context = useContext(DarkModeContext);
+            const { isDark, setIsDark } = context;
+
+            const toggleHandler = () => setIsDark(!isDark)
+
+            return (
+                <footer
+                    className="footer"
+                    style={
+                        {
+                            backgroundColor: isDark ? 'black' : 'white',
+                            color: isDark ? 'white' : 'black'
+                        }
+                    }
+                >
+                    <button onClick={toggleHandler}>{isDark ? 'Light Mode' : 'Dark Mode'}</button>
+                    Copyright 2023 team-ohgiraffers. all rigths resered
+                </footer>
+            );
+        }
+
+        function Page() {
+            return (
+                <div className="page">
+                    <Header />
+                    <Content />
+                    <Footer />
+                </div>
+            );
+        }
+
+        function App() {
+            const [isDark, setIsDark] = useState(false);
+
+            return (                            /* {{} <- 두번쨰 괄호 : 객체 프로퍼티 } <- 첫번째 괄호 : 자바스크립트 문법을 사용하겠다 */
+                <DarkModeContext.Provider value={{ isDark, setIsDark }}/* value가 없으면 defaultValue 값을 따라간다 */>
+                    <Page />
+                </DarkModeContext.Provider>
+            )
+        }
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+
+    </script>
+</body>
+</html>

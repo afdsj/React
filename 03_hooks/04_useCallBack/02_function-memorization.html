@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다.
+    -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect, useCallback } = React;
+        function App() {
+            const [number, setNumber] = useState(0);
+            const [toggle, setToggle] = useState(false);
+
+            /*  01. useCallback이란?
+                02. useCallback의 사용법?
+                03. useCallback(callback Funtion, [감지대상]); 
+            */
+            const printNumber = useCallback(() => {
+                console.log(`current number ${number}`);
+            }, [number]); /* 의존성 배열 자리에 빈 배열을 두게 되면 마운트 시점에 한번 지역 변수 초기화를 
+                            위해 사용하고 나서 함수는 새롭게 정의되지 않는다 */
+
+            useEffect(() => {
+                console.log(`printNumber 값 변화 인지됨`);
+            }, [printNumber]);
+
+            return (
+                <>
+                    <input
+                        type="number"
+                        value={number}
+                        onChange={e => setNumber(e.target.value)}
+                    />
+                    <button onClick={() => setToggle(!toggle)}>
+                        {String(toggle)}
+                    </button>
+                    <button onClick={printNumber}>PrintNumberState</button>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+</body>
+</html>

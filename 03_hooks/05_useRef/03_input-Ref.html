@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다.-->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useRef, useEffect } = React;
+        function LoginComponent() {
+            const [form, setForm] = useState({
+                username: '',
+                password: ''
+            });
+
+            const usernameRef = useRef();
+            useEffect(() => {
+                console.log(usernameRef.current);
+                usernameRef.current.focus();
+            }, []); //()=>{}, [form]이 될 경우, 포커스를 계속 id로 잡아주기 때문에 빈 배열로...
+
+            const onChangeHandler = e => {
+                setForm({
+                    ...form,
+                    [e.target.name]: e.target.value
+                });
+            }
+
+            const onClickHandler = () => {
+                alert(`username: ${form.username} \n password: ${form.password}`);
+                setForm({
+                    username: '',
+                    password: ''
+                });
+            }
+
+            return (
+                <>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="이름"
+                        onChange={onChangeHandler}
+                        value={form.username}
+                        ref={usernameRef} />
+                    <br />
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="비밀번호"
+                        onChange={onChangeHandler}
+                        value={form.password} />
+                    <br />
+                    <button onClick={onClickHandler}>로그인</button>
+                </>
+            )
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<LoginComponent/>);
+    </script>
+</body>
+</html>
