@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+        React Home -> 문서 -> 웹사이트에 react 추가하기 -> 2단계_스크립트 태그 추가하기
+        외부 파일을 불러오는 script의 경우 head 안에 작성해준다.
+    -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!--babel-->
+    <script crossorigin src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- AXIOS unpkg CON 사용하기 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState } = React;
+
+        function SearchBox({ setImgUrl }) {
+            const [imojiName, setImojiName] = useState("");
+            const onChangeHandler = e => {
+                console.log(e.target.value);
+                setImojiName(e.target.value);
+            }
+            const onClickHandler = () => {
+                /* fetch로 작성할 경우 */
+                // fetch("https://api.github.com/emojis")
+                // .then(response => response.json())
+                // .then(data => console.log['100']);
+
+                /* axios로 작성할 경우 */
+                axios.get("https://api.github.com/emojis")
+                    .then(res => {
+                        console.log(res.data[imojiName]);
+                        setImgUrl(res.data[imojiName]);
+                    });
+            };
+
+            return (
+                <>
+                    <input type="text" onChange={onChangeHandler} />
+                    <button onClick={onClickHandler}>검색</button>
+                </>
+            )
+        }
+
+        function ImageBox({ imgUrl }) {
+            return !!imgUrl ? <img src={imgUrl} /> : <h1>고민영 최고</h1> // truty일 경우 화면에 이미지 보여짐
+        }
+
+        function App() {
+            const [imgUrl, setImgUrl] = useState("");
+            return (
+                <>
+                    <SearchBox setImgUrl={setImgUrl}/>
+                    <br/>
+                    <ImageBox imgUrl={imgUrl}/>
+                </>
+            )
+        }
+        ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+    </script>
+</body>
+</html>
